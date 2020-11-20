@@ -1,5 +1,5 @@
 #include "adminisztrator.h"
-//test9
+//test10
 Adminisztrator::Adminisztrator()
 {
   
