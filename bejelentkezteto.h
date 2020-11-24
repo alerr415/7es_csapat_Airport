@@ -3,6 +3,8 @@
 
 #include <string>
 #include "manipulator.h"
+#include "adminisztrator.h"
+#include "operator.h"
 
 class Bejelentkezteto
 {

@@ -22,4 +22,5 @@ HEADERS += \
     manipulator.h \
     operator.h \
     repuloter.h \
-    utazo.h
+	utazo.h \
+	stringhandler.h

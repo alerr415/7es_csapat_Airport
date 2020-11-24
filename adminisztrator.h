@@ -9,6 +9,7 @@ class Adminisztrator : public Operator
 {
 public:
     Adminisztrator();
+    Adminisztrator(std::string _felhasznalonev, std::string _jelszo);
     virtual ~Adminisztrator() override = default;
     virtual void keres() const override;
     virtual void modosit() override;

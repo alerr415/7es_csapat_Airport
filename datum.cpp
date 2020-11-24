@@ -19,4 +19,13 @@ bool Datum::operator ==(const Datum &other) const
             && this->perc == perc;
 }
 
+bool Datum::operator <(const Datum &other) const
+{
+    return this->ev < other.ev
+            && this->honap < other.honap
+            && this->nap < other.nap
+            && this->ora < other.ora
+            && this->perc < other.perc;
+}
+
 
