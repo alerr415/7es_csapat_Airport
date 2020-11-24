@@ -11,15 +11,17 @@ private:
     std::list<Jarat> indulo;
     std::list<Jarat> erkezo;
     //+ Time ido ???? balint te jossz
+    Datum ido;
 private:
     Repuloter();
-    Repuloter(const Repuloter &other);
+    Repuloter(const Repuloter &) = delete;
+    Repuloter(const Repuloter&&) = delete;
 public:
     static Repuloter& getInstance();
 
     void addJarat(const Jarat& ujJarat);
-    std::list<Jarat> getIndulo() const;
-    std::list<Jarat> getErkezo() const;
+    std::list<Jarat>& getIndulo();
+    std::list<Jarat>& getErkezo();
     void erkezoMegjelenit() const;
     void induloMegjelenit() const;
 };

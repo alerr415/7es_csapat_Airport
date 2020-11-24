@@ -10,7 +10,8 @@ protected:
     std::string felhasznalonev, jelszo;
 public:
     Operator();
-    void keres() const override;
+    virtual ~Operator() override = default;
+    virtual void keres() const override;
     virtual void modosit();
 };
 

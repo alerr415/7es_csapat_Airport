@@ -7,13 +7,12 @@
 
 class Adminisztrator : public Operator
 {
-protected:
-    std::string felhasznalonev, jelszo;
 public:
     Adminisztrator();
-    void keres() const override;
-    void modosit() override;
-    void teljesBevitel() const;
+    virtual ~Adminisztrator() override = default;
+    virtual void keres() const override;
+    virtual void modosit() override;
+    virtual void teljesBevitel() const;
 };
 
 #endif // ADMINISZTRATOR_H
