@@ -15,6 +15,7 @@ std::list<Jarat>& Repuloter::getErkezo()
 
 void Repuloter::erkezoMegjelenit() const
 {
+    // tesztelésre; nem végleges
     for (auto e : erkezo)
     {
         std::cout << e.getJaratAzonosito() << "|"
@@ -24,17 +25,19 @@ void Repuloter::erkezoMegjelenit() const
                   << e.getIndulas().getHonap() << "-"
                   << e.getIndulas().getNap() << "-"
                   << e.getIndulas().getOra() << "-"
+                  << e.getIndulas().getPerc() << "|"
                   << e.getErkezes().getEv() << "-"
                   << e.getErkezes().getHonap() << "-"
                   << e.getErkezes().getNap() << "-"
                   << e.getErkezes().getOra() << "-"
-                  << e.getErkezes().getPerc() << "|"                 << e.getIndulas().getPerc() << "|"
+                  << e.getErkezes().getPerc() << "|"
                   << e.getKeses() << std::endl;
     }
 }
 
 void Repuloter::induloMegjelenit() const
 {
+    // tesztelésre; nem végleges
     for (auto e : indulo)
     {
         std::cout << e.getJaratAzonosito() << "|"
@@ -44,12 +47,12 @@ void Repuloter::induloMegjelenit() const
                   << e.getIndulas().getHonap() << "-"
                   << e.getIndulas().getNap() << "-"
                   << e.getIndulas().getOra() << "-"
+                  << e.getIndulas().getPerc() << "|"
                   << e.getErkezes().getEv() << "-"
                   << e.getErkezes().getHonap() << "-"
                   << e.getErkezes().getNap() << "-"
                   << e.getErkezes().getOra() << "-"
                   << e.getErkezes().getPerc() << "|"
-                  << e.getIndulas().getPerc() << "|"
                   << e.getKeses() << std::endl;
     }
 }
@@ -74,20 +77,16 @@ void Repuloter::addJarat(const Jarat &ujJarat)
 {
     if (ujJarat.getHova() == nev)
     {
-        auto it = erkezo.begin();
-        while (it != erkezo.end() && it->getErkezes() < ujJarat.getErkezes())
-        {
-            ++it;
-        }
-        erkezo.insert(++it,ujJarat);
+        erkezo.push_back(ujJarat);
+        erkezo.sort([](const Jarat& a, const Jarat& b) {
+            return a.getErkezes() < b.getErkezes();
+        });
     }
     else if (ujJarat.getHonnan() == nev)
     {
-        auto it =indulo.begin();
-        while (it != indulo.end() && it->getIndulas() < ujJarat.getIndulas())
-        {
-            ++it;
-        }
-        indulo.insert(++it,ujJarat);
+        indulo.push_back(ujJarat);
+        indulo.sort([](const Jarat& a, const Jarat& b) {
+            return a.getIndulas() < b.getIndulas();
+        });
     }
 }
