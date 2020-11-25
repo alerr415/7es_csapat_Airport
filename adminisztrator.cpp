@@ -1,11 +1,20 @@
 #include "adminisztrator.h"
+Adminisztrator::Adminisztrator(std::string _felhasznalonev, std::string _jelszo):
+    Operator(_felhasznalonev,_jelszo)
+{
+}
 
-Adminisztrator::Adminisztrator()
+void Adminisztrator::keres() const
 {
 
 }
 
-Adminisztrator::Adminisztrator(std::string _felhasznalonev, std::string _jelszo):
-    Operator(_felhasznalonev,_jelszo)
+void Adminisztrator::modosit()
 {
+
+}
+
+void Adminisztrator::teljesBevitel() const
+{
+
 }

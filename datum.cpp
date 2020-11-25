@@ -16,7 +16,7 @@ bool Datum::operator ==(const Datum &other) const
             && this->honap == other.honap
             && this->nap == other.nap
             && this->ora == other.ora
-            && this->perc == perc;
+            && this->perc == other.perc;
 }
 
 bool Datum::operator <(const Datum &other) const
@@ -26,6 +26,31 @@ bool Datum::operator <(const Datum &other) const
             && this->nap < other.nap
             && this->ora < other.ora
             && this->perc < other.perc;
+}
+
+unsigned Datum::getEv() const
+{
+    return ev;
+}
+
+unsigned Datum::getHonap() const
+{
+    return honap;
+}
+
+unsigned Datum::getNap() const
+{
+    return nap;
+}
+
+unsigned Datum::getOra() const
+{
+    return ora;
+}
+
+unsigned Datum::getPerc() const
+{
+   return perc;
 }
 
 

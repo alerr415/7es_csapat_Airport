@@ -7,8 +7,8 @@ class Utazo : public Manipulator
 {
 public:
     Utazo();
-    ~Utazo() = default;
-    void keres() const;
+    virtual ~Utazo() override = default;
+    void keres() const override;
 };
 
 #endif // UTAZO_H

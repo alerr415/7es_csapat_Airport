@@ -39,20 +39,21 @@ private:
 	}
 
 	template <class T>
-	T impl_split(const std::string& str, char separator) const {
+    T impl_split(const std::string& str, char separator) const {
 		T words;
+        std::string working = str;
 		std::string::iterator occurance;
 		do {
-			occurance = std::find_if(std::begin(str), std::end(str), [separator](char c) {
+            occurance = std::find_if(std::begin(working), std::end(working), [separator](char c) {
 				return (c==separator)?true:false;
 			});
-			if (occurance != end(str)) {
-				std::string word = str.substr(0,occurance-std::begin(str));
+            if (occurance != std::end(working)) {
+                std::string word = str.substr(0,occurance-std::begin(working));
 				words.push_back(word);
-				str = str.substr(occurance-std::begin(str)+1,str.length());
+                working=working.substr(occurance-std::begin(working)+1,working.length());
 			}
-		} while (occurance != std::end(str));
-		words.push_back(str);
+        } while (occurance != std::end(working));
+        words.push_back(working);
 		return words;
 	}
 
@@ -99,7 +100,7 @@ public:
 	// all data structures could be parameters, that have a push_back() function
 	// returns the string splitted into substrings (separator characters not included)
 	template <class T = std::list<std::string>>
-	static T split(const std::string& str, char separator = ' ') {
+    static T split(const std::string& str, char separator = ' ') {
 		return get().impl_split<T>(str,separator);
 	}
 

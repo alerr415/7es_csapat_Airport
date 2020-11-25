@@ -1,6 +1,7 @@
 #include "repuloter.h"
 #include <chrono>
 #include <ctime>
+#include <iostream>
 
 std::list<Jarat>& Repuloter::getIndulo()
 {
@@ -10,6 +11,47 @@ std::list<Jarat>& Repuloter::getIndulo()
 std::list<Jarat>& Repuloter::getErkezo()
 {
     return erkezo;
+}
+
+void Repuloter::erkezoMegjelenit() const
+{
+    for (auto e : erkezo)
+    {
+        std::cout << e.getJaratAzonosito() << "|"
+                  << e.getHonnan() << "|"
+                  << e.getHova() << "|"
+                  << e.getIndulas().getEv() << "-"
+                  << e.getIndulas().getHonap() << "-"
+                  << e.getIndulas().getNap() << "-"
+                  << e.getIndulas().getOra() << "-"
+                  << e.getErkezes().getEv() << "-"
+                  << e.getErkezes().getHonap() << "-"
+                  << e.getErkezes().getNap() << "-"
+                  << e.getErkezes().getOra() << "-"
+                  << e.getErkezes().getPerc() << "|"                 << e.getIndulas().getPerc() << "|"
+                  << e.getKeses() << std::endl;
+    }
+}
+
+void Repuloter::induloMegjelenit() const
+{
+    for (auto e : indulo)
+    {
+        std::cout << e.getJaratAzonosito() << "|"
+                  << e.getHonnan() << "|"
+                  << e.getHova() << "|"
+                  << e.getIndulas().getEv() << "-"
+                  << e.getIndulas().getHonap() << "-"
+                  << e.getIndulas().getNap() << "-"
+                  << e.getIndulas().getOra() << "-"
+                  << e.getErkezes().getEv() << "-"
+                  << e.getErkezes().getHonap() << "-"
+                  << e.getErkezes().getNap() << "-"
+                  << e.getErkezes().getOra() << "-"
+                  << e.getErkezes().getPerc() << "|"
+                  << e.getIndulas().getPerc() << "|"
+                  << e.getKeses() << std::endl;
+    }
 }
 
 Repuloter::Repuloter()
@@ -33,7 +75,7 @@ void Repuloter::addJarat(const Jarat &ujJarat)
     if (ujJarat.getHova() == nev)
     {
         auto it = erkezo.begin();
-        while (it->getErkezes() < ujJarat.getErkezes())
+        while (it != erkezo.end() && it->getErkezes() < ujJarat.getErkezes())
         {
             ++it;
         }
@@ -42,7 +84,7 @@ void Repuloter::addJarat(const Jarat &ujJarat)
     else if (ujJarat.getHonnan() == nev)
     {
         auto it =indulo.begin();
-        while (it->getIndulas() < ujJarat.getIndulas())
+        while (it != indulo.end() && it->getIndulas() < ujJarat.getIndulas())
         {
             ++it;
         }

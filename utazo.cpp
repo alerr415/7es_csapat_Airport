@@ -4,3 +4,8 @@ Utazo::Utazo()
 {
 
 }
+
+void Utazo::keres() const
+{
+
+}
