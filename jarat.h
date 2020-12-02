@@ -11,6 +11,7 @@ private:
     Datum erkezes, indulas;
     unsigned keses;
 public:
+    Jarat() = default;
     Jarat(std::string _jaratAzonosito, std::string _honnan, std::string _hova, const Datum& _indulas,  const Datum& _erkezes,unsigned _keses);
     void print() const;
 
