@@ -20,9 +20,12 @@ void Adminisztrator::modosit()
 
 void Adminisztrator::teljesBevitel() const
 {
-    // bejelntekés után vagyunk, azt a main végzi
-    // beviteli adatok megjelenítése
-    std::cout << "Adja meg a beviteli módot:\n  1 : manuális\n  2 : fájlból olvasás" << std::endl;
+//    // bejelntekés után vagyunk, azt a main végzi
+//    // beviteli adatok megjelenítése
+//    std::cout << "Adja meg a beviteli módot:\n  1 : manuális\n  2 : fájlból olvasás" << std::endl;
+//    int opcio = 0;
+//    std::cin >> opcio;
+//    if (opcio)
 
 /*
 // teljes adatbevitel fileolvasás része

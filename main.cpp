@@ -71,7 +71,7 @@ int main()
 
             // töröljük a komplet thread-et
             //clock->join();
-            clock->detach();
+            clock->join();
             delete clock;
             // opciók
             std::cout << ">" << std::flush;
