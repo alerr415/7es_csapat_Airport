@@ -2,7 +2,10 @@
 #define OPERATOR_H
 
 #include "manipulator.h"
+#include "repuloter.h"
 #include <string>
+#include <iostream>
+#include <algorithm>
 
 class Operator : public Manipulator
 {
