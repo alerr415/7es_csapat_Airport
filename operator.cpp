@@ -5,24 +5,6 @@ Operator::Operator(std::string _felhasznalonev, std::string _jelszo):
 {
 }
 
-void Operator::keresMegjelenit(std::list<Jarat>::const_iterator &_it) const
-{
-    std::cout << (*_it).getJaratAzonosito() << "|"
-              << (*_it).getHonnan() << "|"
-              << (*_it).getHova() << "|"
-              << (*_it).getIndulas().getEv() << "-"
-              << (*_it).getIndulas().getHonap() << "-"
-              << (*_it).getIndulas().getNap() << "-"
-              << (*_it).getIndulas().getOra() << "-"
-              << (*_it).getIndulas().getPerc() << "|"
-              << (*_it).getErkezes().getEv() << "-"
-              << (*_it).getErkezes().getHonap() << "-"
-              << (*_it).getErkezes().getNap() << "-"
-              << (*_it).getErkezes().getOra() << "-"
-              << (*_it).getErkezes().getPerc() << "|"
-              << (*_it).getKeses() << std::endl;
-}
-
 void Operator::keres() const
 {
     Repuloter& instance = Repuloter::getInstance();
@@ -37,21 +19,30 @@ void Operator::keres() const
     std::cin >> param;
     std::cout << "Adja meg a keresett kulcsszót!" << std::endl;
     std::cin >> kulcsszo;
+    /*if (indulo)
+     * ref lista indulo
+     * else
+     * ref lista erkezo
+    ez alapjan hivja meg a switch case-eket*/
     switch (param) {
-    case 1: std::cout << "Az innen (" << param << ") induló gépek adatai: " << std::endl;
-            //std::for_each(instance.getIndulo().cbegin(),instance.getIndulo().cend(),[&param](Jarat& j){
-                 //         if(j.getHonnan()==param)
-                 //             keresMegjelenit(j);
-                //});
-//                    for(auto j: instance.getIndulo()) {
-//                        if(j.getHonnan()==param)
-//                         keresMegjelenit(j);
-//            }
-
-
-        break;
-    case 2:
-        break;
+    case 1: std::cout << "Az innen (" << kulcsszo << ") induló gépek adatai: " << std::endl;
+            if(kulcsszo==instance.getNev())
+                for(auto j: instance.getIndulo()) {
+                    if(j.getHonnan()==kulcsszo)
+                        std::cout << j;
+                }
+            else
+                for(auto j: instance.getErkezo()) {
+                    if(j.getHonnan()==kulcsszo)
+                        std::cout << j;
+                }
+            break;
+    case 2: std::cout << "Az ide (" << kulcsszo << ") induló gépek adatai: " << std::endl;
+            for(auto j: instance.getIndulo()) {
+                if(j.getHova()==kulcsszo)
+                    std::cout << j;
+            }
+            break;
     case 3:
         break;
     case 4:

@@ -19,6 +19,7 @@ private:
 public:
     static Repuloter& getInstance();
 
+    std::string& getNev();
     void addJarat(const Jarat& ujJarat);
     std::list<Jarat>& getIndulo();
     std::list<Jarat>& getErkezo();

@@ -73,6 +73,11 @@ Repuloter &Repuloter::getInstance()
     return instance;
 }
 
+std::string &Repuloter::getNev()
+{
+    return nev;
+}
+
 void Repuloter::addJarat(const Jarat &ujJarat)
 {
     if (ujJarat.getHova() == nev)
