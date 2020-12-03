@@ -3,9 +3,10 @@
 
 #include "manipulator.h"
 #include "repuloter.h"
+#include "stringhandler.h"
 #include <string>
 #include <iostream>
-#include <algorithm>
+#include <vector>
 
 class Operator : public Manipulator
 {
