@@ -9,3 +9,13 @@ void Utazo::keres() const
 {
 
 }
+
+void Utazo::modosit()
+{
+
+}
+
+void Utazo::teljesBevitel()
+{
+
+}

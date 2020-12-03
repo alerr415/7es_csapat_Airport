@@ -29,6 +29,16 @@ void Adminisztrator::teljesBevitel()
     }
 }
 
+void Adminisztrator::modosit()
+{
+
+}
+
+void Adminisztrator::keres() const
+{
+
+}
+
 void Adminisztrator::manualisBevitel()
 {
     std::cout << "Adja meg a beviteli opciót:\n 1 : új rekord\n 2 : rekord módosítása" << std::endl;

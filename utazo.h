@@ -9,6 +9,8 @@ public:
     Utazo();
     virtual ~Utazo() override = default;
     void keres() const override;
+    void modosit() override;
+    void teljesBevitel() override;
 };
 
 #endif // UTAZO_H

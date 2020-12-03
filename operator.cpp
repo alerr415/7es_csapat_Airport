@@ -67,3 +67,8 @@ void Operator::modosit()
 {
 
 }
+
+void Operator::teljesBevitel()
+{
+
+}
