@@ -11,6 +11,8 @@ class Operator : public Manipulator
 {
 protected:
     std::string felhasznalonev, jelszo;
+
+    void keresMegjelenit(std::list<Jarat>::const_iterator& _it) const;
 public:
     Operator() = default;
     Operator(std::string _felhasznalonev, std::string _jelszo);
