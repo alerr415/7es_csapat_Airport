@@ -19,6 +19,8 @@ Manipulator *Bejelentkezteto::bejelentkeztet(const std::string &felhasznalonev, 
 {
     std::ifstream alkalmazottak;
     alkalmazottak.open("alkalmazottak.csv",std::ios_base::in);
+    if (!alkalmazottak.is_open())
+        return nullptr;
     std::string line;
     while (getline(alkalmazottak,line)) {
         std::vector<std::string> components = String::split<std::vector<std::string>>(line,';');

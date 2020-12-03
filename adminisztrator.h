@@ -8,18 +8,20 @@
 
 class Adminisztrator : public Manipulator
 {
+private:
+    std::string felhasznalonev = "";
+    std::string jelszo = "";
 public:
     Adminisztrator() = default;
     Adminisztrator(std::string _felhasznalonev, std::string _jelszo);
     virtual ~Adminisztrator() override = default;
     virtual void teljesBevitel() override;
     virtual void modosit() override;
-    virtual void keres() const override;
+    virtual void keres() override;
 private:
     void manualisBevitel();
     void fileBevitel();
     Jarat rekordBeolvas();
-    void rekordModosit();
 };
 
 #endif // ADMINISZTRATOR_H

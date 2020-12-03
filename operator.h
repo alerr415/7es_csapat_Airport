@@ -16,9 +16,11 @@ public:
     Operator() = default;
     Operator(std::string _felhasznalonev, std::string _jelszo);
     virtual ~Operator() override = default;
-    virtual void keres() const override;
+    virtual void keres() override;
     virtual void modosit() override;
     virtual void teljesBevitel() override;
+private:
+    void rekordBeolvas(Jarat& toModify);
 };
 
 #endif // OPERATOR_H

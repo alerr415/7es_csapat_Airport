@@ -1,5 +1,8 @@
 #include <iostream>
 #include "repuloter.h"
+#include "manipulator.h"
+#include "bejelentkezteto.h"
+#include "utazo.h"
 #include <fstream>
 #include <vector>
 #include "stringhandler.h"
@@ -7,34 +10,37 @@
 #include <cstdlib>
 #include <thread>
 #include <mutex>
-#include <condition_variable>
-
-
-
-using namespace std;
-
-
-void printTime(const std::chrono::system_clock::time_point& tp)
-{
-    time_t tp_t = std::chrono::system_clock::to_time_t(tp);
-    std::cout << ctime(&tp_t) << std::endl;
-}
+#include <atomic>
 
 /*
-   Működés:
-   alapállapot: 1 percenként frissítve kiírja a képernyőre az időt (minta)
-   [ENTER] megnyomására állapotot vált, megjelenik a prompt
-   0: leállítja a futást
-   1,2: átállítja a feliratot
+    MŰKÖDÉS:
+    alapesetben 3 másodpercenként frissít
+    ENTER egyszeri megnyomásával lehet megszakítani (lehet kicsit kell várni, mielőtt átáll)
+    a minta adminisztrátor jelszava, felh.neve admin, admin
+    a minta operátor jelszava, felh.neve: tester, tester
+    elsőre csak egy err felirat fog megjelenni, a teljes adatbevitel fileból olvasás részével lehet feltölteni
+    a járatadatok a tester.csv fileban vannak
 */
 
 
+Manipulator* bejelentkeztetoForm()
+{
+    system("cls");
+    std::string felhasznalonev,jelszo;
+    std::cout << "Felhasználónév: ";
+    std::cin >> felhasznalonev;
+    std::cout << "Jelszo: ";
+    std::cin >> jelszo;
+    system("cls");
+    Manipulator* toReturn = Bejelentkezteto::getInstance().bejelentkeztet(felhasznalonev,jelszo);
+    return toReturn;
+}
+
 int main()
 {
-    std::string motd = "Message of the day";
         // thread control
-        std::condition_variable cvar;
         std::mutex mtx;
+        std::atomic<int> mode(1);
 
         // program stop flag
         bool over = false;
@@ -43,25 +49,32 @@ int main()
 
         // képfrissítő függvény mehet ide
         auto clock_function = [&]() {
-            // egyből meg is állítja magát, amíg nem kap értesítést
-            std::unique_lock<std::mutex> lk(mtx);
-            cvar.wait(lk,[&]() {return !stopClock;});
-            mtx.unlock();
 
+            mtx.lock();
+            mtx.unlock();
             while (!stopClock)
             {
                 system("cls");
-                std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
-                printTime(now);
                 mtx.lock();
-                std::cout << motd << std::endl;
+                std::chrono::system_clock::time_point most = std::chrono::system_clock::now();
+                Repuloter::getInstance().szinkronizal(most);
+                //std::cout << motd << std::endl;
+                if (mode == 2)
+                {
+                    std::cout << "ERKEZO JARATOK" << std::endl;
+                    Repuloter::getInstance().erkezoMegjelenit();
+                } else {
+                    std::cout << "INDULO JARATOK" << std::endl;
+                    Repuloter::getInstance().induloMegjelenit();
+                }
                 mtx.unlock();
-                std::this_thread::sleep_for(std::chrono::seconds(60));
+                std::this_thread::sleep_for(std::chrono::seconds(3));
             }
         };
 
         std::thread* clock = new std::thread(clock_function);
 
+        // fő program
         while (!over)
         {
             std::cin.get();
@@ -70,16 +83,17 @@ int main()
             mtx.unlock();
 
             // töröljük a komplet thread-et
-            //clock->join();
             clock->join();
             delete clock;
             // opciók
+            system("cls");
+            std::cout << "0 : Kilépés\n1 : Keresés\n2 : Teljes adatbevitel (bejelentkezés szükséges)\n3 : Modositas (bejelentkezes szukseges)\n4 : tabla uzemmod" << std::endl;
             std::cout << ">" << std::flush;
             int param = 0;
             std::cin >> param;
             if (param == 0)
             {
-                std::cout << "game over" << std::endl;
+                std::cout << "Kilépés" << std::endl;
                 over = true;
             }
             else
@@ -92,18 +106,61 @@ int main()
                 // megfelelő funkció elindítása
                 switch (param)
                 {
-                case 1: {std::cout << "1-es opcio" << std::endl; motd = "option 1"; break;}
-                case 2: {std::cout << "2-es opcio" << std::endl; motd = "option 2"; break;}
+                case 1: {
+                    Utazo u;
+                    u.keres();
+                    std::cout << "Kereses vege" << std::endl;
+                    break;
+                }
+                case 2: {
+                    Manipulator* m = bejelentkeztetoForm();
+                    if (m == nullptr)
+                    {
+                        std::cout << "Hibás felhasználónév, vagy jelszó" << std::endl;
+                        break;
+                    }
+                    m->teljesBevitel();
+                    delete m;
+
+                    std::cout << "Teljes adatbevitel vége" << std::endl;
+                    break;
+                }
+                case 3: {
+                    Manipulator* m = bejelentkeztetoForm();
+                    if (m==nullptr)
+                    {
+                        std::cout << "Hibas felhasznalonev, vagy jelszo" << std::endl;
+                        break;
+                    }
+                    m->modosit();
+                    delete m;
+                    std::cout << "Modositas vege" << std::endl;
+                    break;
+                }
+                case 4: {
+                    std::cout << "1 : Indulo\n2 : Erkezo\n>";
+                    int m;
+                    std::cin >> m;
+                    if (m == 1 || m == 2)
+                    {
+                        mode = m;
+                        std::cout << "Uzemmod atallitva" << std::endl;
+                    } else {
+                        std::cout << "Ervenyetlen parancs" << std::endl;
+                    }
+                    break;
+                }
+                default: break;
                 }
 
                 // frissítés futási feltétele
 
                 stopClock = false;
-                mtx.unlock();
 
                 // frissítés beindítása
-                cvar.notify_all();
                 std::cin.ignore();
+                std::cin.get();
+                mtx.unlock();
             }
 
         }

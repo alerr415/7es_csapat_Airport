@@ -63,6 +63,6 @@ unsigned Datum::getPerc() const
 
 std::ostream &operator <<(std::ostream &stream, const Datum &datum)
 {
-    stream << datum.ev << "-" << datum.honap << "-" << datum.nap << "-" << datum.ora << "-" << datum.perc << std::endl;
+    stream << datum.ev << "-" << datum.honap << "-" << datum.nap << "-" << datum.ora << "-" << datum.perc;
     return stream;
 }

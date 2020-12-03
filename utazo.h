@@ -8,7 +8,7 @@ class Utazo : public Manipulator
 public:
     Utazo();
     virtual ~Utazo() override = default;
-    void keres() const override;
+    void keres() override;
     void modosit() override;
     void teljesBevitel() override;
 };

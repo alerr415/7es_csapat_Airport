@@ -3,6 +3,7 @@
 
 #include "jarat.h"
 #include <list>
+#include <chrono>
 
 class Repuloter
 {
@@ -18,7 +19,7 @@ private:
     Repuloter(const Repuloter&&) = delete;
 public:
     static Repuloter& getInstance();
-
+    void szinkronizal(const std::chrono::system_clock::time_point& most);
     std::string& getNev();
     void addJarat(const Jarat& ujJarat);
     std::list<Jarat>& getIndulo();
