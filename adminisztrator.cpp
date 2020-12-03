@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <algorithm>
 
 Adminisztrator::Adminisztrator(std::string _felhasznalonev, std::string _jelszo):
     Operator(_felhasznalonev,_jelszo)
@@ -79,7 +80,6 @@ void Adminisztrator::fileBevitel()
 
 Jarat Adminisztrator::rekordBeolvas()
 {
-    Jarat toReturn;
     std::string azonosito = "";
     std::string honnan = "";
     std::string hova = "";
@@ -98,10 +98,45 @@ Jarat Adminisztrator::rekordBeolvas()
     std::cin >> erkezes;
     std::cout << "Adja meg a járat késését";
     std::cin >> keses;
+    std::vector<std::string> dateComponents = String::split<std::vector<std::string>>(indulas,'-');
+    Datum indulas_d(String::strToNum<unsigned>(dateComponents[0]),String::strToNum<unsigned>(dateComponents[1]),String::strToNum<unsigned>(dateComponents[2]),String::strToNum<unsigned>(dateComponents[3]),String::strToNum<unsigned>(dateComponents[4]));
+    dateComponents.clear();
+    dateComponents = String::split<std::vector<std::string>>(erkezes,'-');
+    Datum erkezes_d(String::strToNum<unsigned>(dateComponents[0]),String::strToNum<unsigned>(dateComponents[1]),String::strToNum<unsigned>(dateComponents[2]),String::strToNum<unsigned>(dateComponents[3]),String::strToNum<unsigned>(dateComponents[4]));
+    Jarat toReturn(azonosito,honnan,hova,indulas_d,erkezes_d,keses);
     return toReturn;
 }
 
 void Adminisztrator::rekordModosit()
 {
+    std::cout << "Adja meg a járat típusát: 1 : érkező\n 2 : induló\n>";
+    int opcio = 0;
+    std::cin >> opcio;
+    std::cout << "Adja meg a járat azonosítóját: ";
+    std::string azonosito = "";
+    std::cin >> azonosito;
+    switch (opcio)
+    {
+    case 1: {
+        auto toModify = std::find_if(Repuloter::getInstance().getErkezo().begin(),Repuloter::getInstance().getErkezo().end(),[azonosito](const Jarat& jarat){
+            return jarat.getJaratAzonosito() == azonosito;
+        });
+        if (toModify == Repuloter::getInstance().getErkezo().end())
+        {
+            std::cout << "A rendszer nem találja a megadott azonosítót";
+            return;
+        } else
+        {
+            std::cout << "A járat adatai:" << std::endl;
+            //TODO: megjelenit() függvény
 
+            std::cout << "Adja meg a módosítandó járat új adatait" << std::endl;
+            *toModify = rekordBeolvas();
+        }
+        break;
+    }
+    case 2:
+        break;
+    default: break;
+    }
 }

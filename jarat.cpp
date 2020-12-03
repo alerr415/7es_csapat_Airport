@@ -72,3 +72,14 @@ Jarat::Jarat(std::string _jaratAzonosito, std::string _honnan, std::string _hova
 }
 
 
+
+std::ostream& operator <<(std::ostream &stream, const Jarat &jarat)
+{
+    stream << jarat.jaratAzonosito << " "
+           << jarat.honnan << " "
+           << jarat.hova << " "
+           << jarat.indulas << " "
+           << jarat.erkezes << " "
+           << jarat.keses << std::endl;
+    return stream;
+}

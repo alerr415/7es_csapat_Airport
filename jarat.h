@@ -3,6 +3,7 @@
 
 #include <string>
 #include "datum.h"
+#include <iostream>
 
 class Jarat
 {
@@ -32,6 +33,10 @@ public:
 
     unsigned getKeses() const;
     void setKeses(const unsigned &value);
+
+    friend std::ostream& operator <<(std::ostream& stream, const Jarat& jarat);
 };
+
+std::ostream& operator <<(std::ostream& stream, const Jarat& jarat);
 
 #endif // JARAT_H
