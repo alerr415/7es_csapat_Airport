@@ -25,10 +25,10 @@ public:
     std::string getHova() const;
     void setHova(const std::string &value);
 
-    Datum getErkezes() const;
+    const Datum& getErkezes() const;
     void setErkezes(const Datum &value);
 
-    Datum getIndulas() const;
+    const Datum& getIndulas() const;
     void setIndulas(const Datum &value);
 
     unsigned getKeses() const;

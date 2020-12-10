@@ -15,7 +15,7 @@ void Adminisztrator::teljesBevitel()
 {
     // bejelntekés után vagyunk, azt a main végzi
     // beviteli adatok megjelenítése
-    std::cout << "Adja meg a beviteli módot:\n  1 : manuális\n  2 : fájlból olvasás\n>";
+    std::cout << "Adja meg a beviteli modot:\n  1 : manualis\n  2 : fajlbol olvasas\n>";
     int opcio = 0;
     std::cin >> opcio;
     switch (opcio)
@@ -32,10 +32,10 @@ void Adminisztrator::teljesBevitel()
 
 void Adminisztrator::modosit()
 {
-    std::cout << "Adja meg a járat típusát:\n 1 : érkező\n 2 : induló\n>";
+    std::cout << "Adja meg a jarat tipusat:\n 1 : erkezo\n 2 : indulo\n>";
     int opcio = 0;
     std::cin >> opcio;
-    std::cout << "Adja meg a járat azonosítóját: ";
+    std::cout << "Adja meg a jarat azonositojat: ";
     std::string azonosito = "";
     std::cin >> azonosito;
     switch (opcio)
@@ -46,13 +46,13 @@ void Adminisztrator::modosit()
         });
         if (toModify == Repuloter::getInstance().getErkezo().end())
         {
-            std::cout << "A rendszer nem találja a megadott azonosítót" << std::endl;
+            std::cout << "A rendszer nem találja a megadott azonositot" << std::endl;
             return;
         } else
         {
-            std::cout << "A járat adatai:" << std::endl;
+            std::cout << "A jarat adatai:" << std::endl;
             std::cout << *toModify;
-            std::cout << "Adja meg a módosítandó járat új adatait" << std::endl;
+            std::cout << "Adja meg a modositando jarat uj adatait" << std::endl;
             *toModify = rekordBeolvas();
         }
         Repuloter::getInstance().getErkezo().sort([](Jarat a, Jarat b) {
@@ -66,13 +66,13 @@ void Adminisztrator::modosit()
         });
         if (toModify == Repuloter::getInstance().getIndulo().end())
         {
-            std::cout << "A rendszer nem találja a megadott azonosítót" << std::endl;
+            std::cout << "A rendszer nem talalja a megadott azonositot" << std::endl;
             return;
         } else
         {
-            std::cout << "A járat adatai:" << std::endl;
+            std::cout << "A jarat adatai:" << std::endl;
             std::cout << *toModify;
-            std::cout << "Adja meg a módosítandó járat új adatait" << std::endl;
+            std::cout << "Adja meg a modositando jarat uj adatait" << std::endl;
             *toModify = rekordBeolvas();
         }
         Repuloter::getInstance().getIndulo().sort([](Jarat a, Jarat b) {
@@ -93,7 +93,7 @@ void Adminisztrator::keres()
 
 void Adminisztrator::manualisBevitel()
 {
-    std::cout << "Adja meg a beviteli opciót:\n 1 : új rekord\n 2 : rekord módosítása\n>";
+    std::cout << "Adja meg a beviteli opciot:\n 1 : uj rekord\n 2 : rekord modositasa\n>";
     unsigned opcio = 0;
     std::cin >> opcio;
     Repuloter& r = Repuloter::getInstance();
@@ -117,12 +117,12 @@ void Adminisztrator::fileBevitel()
     Repuloter& r = Repuloter::getInstance();
     std::string file = "";
     std::ifstream input;
-    std::cout << "adja meg a file nevet: ";
+    std::cout << "adja meg a fajl nevet: ";
     std::cin >> file;
     input.open(file,std::ios_base::in);
     if (!input.is_open())
     {
-        std::cout << "A megadott fájl nem található" << std::endl;
+        std::cout << "A megadott fajl nem talalhato" << std::endl;
         return ;
     }
     std::string line;
@@ -152,18 +152,18 @@ Jarat Adminisztrator::rekordBeolvas()
     std::string indulas = "";
     std::string erkezes = "";
     unsigned keses = 0;
-    std::cout << "Adja meg a járat azonosítóját: " ;
+    std::cout << "Adja meg a jarat azonositojat: " ;
     std::cin >> azonosito;
-    std::cout << "adja meg a járat indulási helyét: ";
+    std::cout << "adja meg a jarat indulasi helyet: ";
     std::cin >> honnan;
-    std::cout << "Adja meg a járat érkezési helyét: ";
+    std::cout << "Adja meg a jarat erkezesi helyet: ";
     std::cin >> hova;
     std::cout << std::flush;
-    std::cout << "Adja meg a járat indulási idejét (yyyy-m-d-h-m): ";
+    std::cout << "Adja meg a jarat indulasi idejet (yyyy-m-d-h-m): ";
     std::cin >> indulas;
-    std::cout << "Adja meg a járat érkezési idejét (yyyy-m-d-h-m): ";
+    std::cout << "Adja meg a jarat erkezesi idejet (yyyy-m-d-h-m): ";
     std::cin >> erkezes;
-    std::cout << "Adja meg a járat késését: ";
+    std::cout << "Adja meg a jarat keseset: ";
     std::cin >> keses;
     std::vector<std::string> dateComponents = String::split<std::vector<std::string>>(indulas,'-');
     Datum indulas_d(String::strToNum<unsigned>(dateComponents[0]),String::strToNum<unsigned>(dateComponents[1]),String::strToNum<unsigned>(dateComponents[2]),String::strToNum<unsigned>(dateComponents[3]),String::strToNum<unsigned>(dateComponents[4]));

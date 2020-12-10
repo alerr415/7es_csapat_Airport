@@ -30,7 +30,7 @@ void Jarat::setHova(const std::string &value)
     hova = value;
 }
 
-Datum Jarat::getErkezes() const
+const Datum& Jarat::getErkezes() const
 {
     return erkezes;
 }
@@ -40,7 +40,7 @@ void Jarat::setErkezes(const Datum &value)
     erkezes = value;
 }
 
-Datum Jarat::getIndulas() const
+const Datum& Jarat::getIndulas() const
 {
     return indulas;
 }

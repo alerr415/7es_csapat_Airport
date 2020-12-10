@@ -27,7 +27,7 @@ Manipulator* bejelentkeztetoForm()
 {
     system("cls");
     std::string felhasznalonev,jelszo;
-    std::cout << "Felhasználónév: ";
+    std::cout << "Felhasznalonev: ";
     std::cin >> felhasznalonev;
     std::cout << "Jelszo: ";
     std::cin >> jelszo;
@@ -87,13 +87,18 @@ int main()
             delete clock;
             // opciók
             system("cls");
-            std::cout << "0 : Kilépés\n1 : Keresés\n2 : Teljes adatbevitel (bejelentkezés szükséges)\n3 : Modositas (bejelentkezes szukseges)\n4 : tabla uzemmod" << std::endl;
+            std::cout << "0 : Kilepes" << std::endl
+                      << "1: Utvonaltervezes" << std::endl
+                      << "2 : Kereses (bejelentkezes szukseges)" << std::endl
+                      << "3 : Teljes adatbevitel (bejelentkezes szukseges)" << std::endl
+                      << "4 : Modositas (bejelentkezes szukseges)" << std::endl
+                      << "5 : tabla uzemmod" << std::endl;
             std::cout << ">" << std::flush;
             int param = 0;
             std::cin >> param;
             if (param == 0)
             {
-                std::cout << "Kilépés" << std::endl;
+                std::cout << "Kilepes" << std::endl;
                 over = true;
             }
             else
@@ -109,23 +114,36 @@ int main()
                 case 1: {
                     Utazo u;
                     u.keres();
-                    std::cout << "Kereses vege" << std::endl;
+                    std::cout << "Utvonaltervezes vege" << std::endl;
                     break;
                 }
                 case 2: {
                     Manipulator* m = bejelentkeztetoForm();
                     if (m == nullptr)
                     {
-                        std::cout << "Hibás felhasználónév, vagy jelszó" << std::endl;
+                        std::cout << "Hibas felhasznalonev, vagy jelszo" << std::endl;
+                        break;
+                    }
+                    m->keres();
+                    delete m;
+
+                    std::cout << "Kereses vege" << std::endl;
+                    break;
+                }
+                case 3: {
+                    Manipulator* m = bejelentkeztetoForm();
+                    if (m == nullptr)
+                    {
+                        std::cout << "Hibás felhasznalonev, vagy jelszo" << std::endl;
                         break;
                     }
                     m->teljesBevitel();
                     delete m;
 
-                    std::cout << "Teljes adatbevitel vége" << std::endl;
+                    std::cout << "Teljes adatbevitel vege" << std::endl;
                     break;
                 }
-                case 3: {
+                case 4: {
                     Manipulator* m = bejelentkeztetoForm();
                     if (m==nullptr)
                     {
@@ -137,7 +155,7 @@ int main()
                     std::cout << "Modositas vege" << std::endl;
                     break;
                 }
-                case 4: {
+                case 5: {
                     std::cout << "1 : Indulo\n2 : Erkezo\n>";
                     int m;
                     std::cin >> m;

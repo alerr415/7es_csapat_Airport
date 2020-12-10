@@ -1,5 +1,6 @@
 #include "operator.h"
 #include "utazo.h"
+#include <algorithm>
 
 Operator::Operator(std::string _felhasznalonev, std::string _jelszo):
     felhasznalonev(_felhasznalonev),jelszo(_jelszo)
@@ -10,63 +11,71 @@ void Operator::keres()
 {
     Repuloter& instance = Repuloter::getInstance();
     int param;
-    std::string kulcsszo, opcio;
-    std::list<Jarat> jaratlista;
-    jaratlista.clear();
-    std::cout << "Mi alapján szeretne keresni?" << std::endl;
-    std::cout << "1 - HONNAN" << std::endl;
-    std::cout << "2 - HOVA" << std::endl;
-    std::cout << "3 - INDULÁS (a megadott időpont utáni indulások listázása)" << std::endl;
-    std::cout << "4 - ÉRKEZÉS (a megadott időpont utáni indulások listázása)" << std::endl;
-    std::cout << "5 - JÁRAT AZONOSÍTÓ" << std::endl;
+    std::string kulcsszo;
+    std::cout << "Adja meg a keresesi" << std::endl
+              << "1 - HONNAN" << std::endl
+              << "2 - HOVA" << std::endl
+              << "3 - INDULAS (yyyy-m-d-h-m)" << std::endl
+              << "4 - ERKEZES (yyyy-m-d-h-m)" << std::endl
+              << "5 - JARAT AZONOSITO" << std::endl
+              << ">";
     std::cin >> param;
-    std::cout << "Adja meg a keresett kulcsszót!" << std::endl;
-    std::cout << "Időpont keresésénél az elvárt megadási formátum: YYYY-MM-DD-HH-MM" << std::endl;
+    std::cout << "Adja meg a keresett kulcsszot:" << std::endl;
     std::cin >> kulcsszo;
     switch (param) {
-    case 1: std::cout << "A(z) " << kulcsszo << " felől ide érkező gépek adatai: " << std::endl;
-            for(auto j: instance.getErkezo()) {
-                if(j.getHonnan()==kulcsszo)
-                    std::cout << j;
-                }
-            break;
-    case 2: std::cout << "Az innen " << kulcsszo << " felé induló gépek adatai: " << std::endl;
-            for(auto j: instance.getIndulo()) {
-                if(j.getHova()==kulcsszo)
-                    std::cout << j;
+    case 1: {
+        std::cout << "A(z) " << kulcsszo << " felol ide erkezo jaratok adatai: " << std::endl;
+        // mintapélda a keresési eredmények számának limitálására
+        for(auto j: instance.getErkezo()) {
+            if(j.getHonnan()==kulcsszo) {
+                std::cout << j;
             }
-            break;
-    case 3: std::cout << "Az ekkortól (" << kulcsszo << ") induló gépek adatai: " << std::endl;
-            for(auto j: instance.getIndulo()) {
-                std::vector<std::string> dateComponents = String::split<std::vector<std::string>>(kulcsszo,'-');
-                Datum idopont(String::strToNum<unsigned>(dateComponents[0]),String::strToNum<unsigned>(dateComponents[1]),String::strToNum<unsigned>(dateComponents[2]),String::strToNum<unsigned>(dateComponents[3]),String::strToNum<unsigned>(dateComponents[4]));
-                dateComponents.clear();
-                if(j.getIndulas()<idopont || j.getIndulas()==idopont)
-                    jaratlista.push_back(j);
+        }
+        break;
+    }
+    case 2: {
+        std::cout << "Az innen " << kulcsszo << " fele indulo jaratok adatai: " << std::endl;
+        for(auto j: instance.getIndulo()) {
+            if(j.getHova()==kulcsszo) {
+                std::cout << j;
             }
-            jaratlista.sort([](Jarat j1, Jarat j2){
-                return j1.getIndulas() < j2.getIndulas(); });
-            jaratlista.clear();
-            break;
-    case 4: std::cout << "Az ekkortól (" << kulcsszo << ") érkező gépek adatai: " << std::endl;
-            for(auto j: instance.getErkezo()) {
-                std::vector<std::string> dateComponents = String::split<std::vector<std::string>>(kulcsszo,'-');
-                Datum idopont(String::strToNum<unsigned>(dateComponents[0]),String::strToNum<unsigned>(dateComponents[1]),String::strToNum<unsigned>(dateComponents[2]),String::strToNum<unsigned>(dateComponents[3]),String::strToNum<unsigned>(dateComponents[4]));
-                dateComponents.clear();
-                if(j.getIndulas()<idopont || j.getIndulas()==idopont)
-                    jaratlista.push_back(j);
+        }
+        break;
+    }
+    case 3: {
+        std::cout << "Az ekkortol (" << kulcsszo << ") indulo jaratok adatai: " << std::endl;
+        std::vector<std::string> dateComponents = String::split<std::vector<std::string>>(kulcsszo,'-');
+        Datum idopont(String::strToNum<unsigned>(dateComponents[0]),String::strToNum<unsigned>(dateComponents[1]),String::strToNum<unsigned>(dateComponents[2]),String::strToNum<unsigned>(dateComponents[3]),String::strToNum<unsigned>(dateComponents[4]));
+        dateComponents.clear();
+        for(auto j: instance.getIndulo()) {
+            if(j.getIndulas()<idopont || j.getIndulas()==idopont) {
+                std::cout << j;
             }
-            jaratlista.sort([](Jarat j1, Jarat j2){
-                return j1.getIndulas() < j2.getIndulas(); });
-            jaratlista.clear();
-            break;
-    case 5: std::cout << "Az ezen (" << kulcsszo << ") járatszámú gépek adatai: " << std::endl;
-            for(auto j: instance.getIndulo()) {
-                if(j.getJaratAzonosito()==kulcsszo)
-                    std::cout << j;
+        }
+        break;
+    }
+    case 4: {
+        std::cout << "Az ekkortol (" << kulcsszo << ") erkezo jaratok adatai: " << std::endl;
+        std::vector<std::string> dateComponents = String::split<std::vector<std::string>>(kulcsszo,'-');
+        Datum idopont(String::strToNum<unsigned>(dateComponents[0]),String::strToNum<unsigned>(dateComponents[1]),String::strToNum<unsigned>(dateComponents[2]),String::strToNum<unsigned>(dateComponents[3]),String::strToNum<unsigned>(dateComponents[4]));
+        dateComponents.clear();
+        for(auto j: instance.getErkezo()) {
+            if(j.getIndulas()<idopont || j.getIndulas()==idopont) {
+                std::cout << j;
             }
-            break;
-    default: std::cout << "ERROR: Érvénytelen keresési paraméter!" << std::endl;
+        }
+                break;
+    }
+    case 5: {
+        std::cout << "Az ezen (" << kulcsszo << ") jaratszamu jaratok adatai: " << std::endl;
+        for(auto j: instance.getIndulo()) {
+            if(j.getJaratAzonosito()==kulcsszo) {
+                std::cout << j;
+            }
+        }
+        break;
+    }
+    default: std::cout << "Ervenytelen keresesi parameter" << std::endl;
         break;
     }
 
@@ -74,10 +83,10 @@ void Operator::keres()
 
 void Operator::modosit()
 {
-    std::cout << "Adja meg a járat típusát:\n 1 : érkező\n 2 : induló\n>";
+    std::cout << "Adja meg a jarat tipusat:\n 1 : erkezo\n 2 : indulo\n>";
     int opcio = 0;
     std::cin >> opcio;
-    std::cout << "Adja meg a járat azonosítóját: ";
+    std::cout << "Adja meg a jarat azonosítojat: ";
     std::string azonosito = "";
     std::cin >> azonosito;
     switch (opcio)
@@ -88,13 +97,13 @@ void Operator::modosit()
         });
         if (toModify == Repuloter::getInstance().getErkezo().end())
         {
-            std::cout << "A rendszer nem találja a megadott azonosítót" << std::endl;
+            std::cout << "A rendszer nem talalja a megadott azonositot" << std::endl;
             return;
         } else
         {
-            std::cout << "A járat adatai:" << std::endl;
+            std::cout << "A jarat adatai:" << std::endl;
             std::cout << *toModify;
-            std::cout << "Adja meg a módosítandó járat új adatait" << std::endl;
+            std::cout << "Adja meg a modositandó jarat uj adatait" << std::endl;
             rekordBeolvas(*toModify);
         }
         Repuloter::getInstance().getErkezo().sort([](Jarat a, Jarat b) {
@@ -108,13 +117,13 @@ void Operator::modosit()
         });
         if (toModify == Repuloter::getInstance().getIndulo().end())
         {
-            std::cout << "A rendszer nem találja a megadott azonosítót" << std::endl;
+            std::cout << "A rendszer nem talalja a megadott azonositot" << std::endl;
             return;
         } else
         {
-            std::cout << "A járat adatai:" << std::endl;
+            std::cout << "A jarat adatai:" << std::endl;
             std::cout << *toModify;
-            std::cout << "Adja meg a módosítandó járat új adatait" << std::endl;
+            std::cout << "Adja meg a modositando jarat uj adatait" << std::endl;
             rekordBeolvas(*toModify);
         }
         Repuloter::getInstance().getIndulo().sort([](Jarat a, Jarat b) {
@@ -139,11 +148,11 @@ void Operator::rekordBeolvas(Jarat &toModify)
     std::string indulas = "";
     std::string erkezes = "";
     unsigned keses = 0;
-    std::cout << "Adja meg a járat indulási idejét (yyyy-m-d-h-m): ";
+    std::cout << "Adja meg a jarat indulasi idejet (yyyy-m-d-h-m): ";
     std::cin >> indulas;
-    std::cout << "Adja meg a járat érkezési idejét (yyyy-m-d-h-m): ";
+    std::cout << "Adja meg a jarat erkezesi idejet (yyyy-m-d-h-m): ";
     std::cin >> erkezes;
-    std::cout << "Adja meg a járat késését: ";
+    std::cout << "Adja meg a jarat keseset: ";
     std::cin >> keses;
     std::vector<std::string> dateComponents = String::split<std::vector<std::string>>(indulas,'-');
     Datum indulas_d(String::strToNum<unsigned>(dateComponents[0]),String::strToNum<unsigned>(dateComponents[1]),String::strToNum<unsigned>(dateComponents[2]),String::strToNum<unsigned>(dateComponents[3]),String::strToNum<unsigned>(dateComponents[4]));
