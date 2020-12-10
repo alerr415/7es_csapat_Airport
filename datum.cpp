@@ -7,8 +7,15 @@ Datum::Datum(unsigned _ev, unsigned _honap, unsigned _nap, unsigned _ora, unsign
     ora(_ora),
     perc(_perc)
 {
-
 }
+
+Datum::Datum(unsigned _ev, unsigned _honap, unsigned _nap):
+    ev(_ev),
+    honap(_honap),
+    nap(_nap),
+    ora(0),
+    perc(0)
+{}
 
 bool Datum::operator ==(const Datum &other) const
 {
