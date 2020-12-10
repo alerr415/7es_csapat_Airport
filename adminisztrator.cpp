@@ -4,7 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
-#include "utazo.h"
+#include "operator.h"
 
 Adminisztrator::Adminisztrator(std::string _felhasznalonev, std::string _jelszo):
     felhasznalonev(_felhasznalonev),jelszo(_jelszo)
@@ -87,8 +87,8 @@ void Adminisztrator::modosit()
 
 void Adminisztrator::keres()
 {
-    Utazo u;
-    u.keres();
+    Operator o;
+    o.keres();
 }
 
 void Adminisztrator::manualisBevitel()
