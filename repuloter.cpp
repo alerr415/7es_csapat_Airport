@@ -21,12 +21,16 @@ void Repuloter::erkezoMegjelenit() const
     });
     if (first == erkezo.cend())
     {
-        std::cout << "err" << std::endl;
+        std::cout << "Nincsenek erkezo jaratok" << std::endl;
         return;
     }
+    std::cout << "Jarat\t\tHonnan\tErkezes\tKeses" << std::endl;
     for (unsigned i=0;i<10;i++)
     {
-        std::cout << *first;
+        std::cout << first->getJaratAzonosito() << "\t"
+                  << first->getHonnan() << "\t"
+                  << first->getErkezes().getOra() << "-" << first->getErkezes().getPerc() << "\t"
+                  << first->getKeses() << std::endl;
         ++first;
     }
 }
@@ -39,12 +43,16 @@ void Repuloter::induloMegjelenit() const
     });
     if (first == indulo.cend())
     {
-        std::cout << "err" << std::endl;
+        std::cout << "Nincsenek indulo jaratok" << std::endl;
         return;
     }
+    std::cout << "Jarat\t\tHova\tIndulas\tKeses" << std::endl;
     for (unsigned i=0;i<10;i++)
     {
-        std::cout << *first;
+        std::cout << first->getJaratAzonosito() << "\t"
+                  << first->getHova() << "\t"
+                  << first->getIndulas().getOra() << "-" << first->getIndulas().getPerc() << "\t"
+                  << first->getKeses() << std::endl;
         ++first;
     }
 }

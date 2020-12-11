@@ -59,6 +59,7 @@ int main()
                 std::chrono::system_clock::time_point most = std::chrono::system_clock::now();
                 Repuloter::getInstance().szinkronizal(most);
                 //std::cout << motd << std::endl;
+                std::cout << "Budapest, Liszt Ferenc Repuloter - BUD" << std::endl;
                 if (mode == 2)
                 {
                     std::cout << "ERKEZO JARATOK" << std::endl;
@@ -88,7 +89,7 @@ int main()
             // opciók
             system("cls");
             std::cout << "0 : Kilepes" << std::endl
-                      << "1: Utvonaltervezes" << std::endl
+                      << "1 : Utvonaltervezes" << std::endl
                       << "2 : Kereses (bejelentkezes szukseges)" << std::endl
                       << "3 : Teljes adatbevitel (bejelentkezes szukseges)" << std::endl
                       << "4 : Modositas (bejelentkezes szukseges)" << std::endl

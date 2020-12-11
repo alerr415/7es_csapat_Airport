@@ -32,7 +32,7 @@ void Adminisztrator::teljesBevitel()
 
 void Adminisztrator::modosit()
 {
-    std::cout << "Adja meg a jarat tipusat:\n 1 : erkezo\n 2 : indulo\n>";
+    std::cout << "Adja meg a jarat tipusat:\n  1 : erkezo\n  2 : indulo\n>";
     int opcio = 0;
     std::cin >> opcio;
     std::cout << "Adja meg a jarat azonositojat: ";
@@ -93,7 +93,7 @@ void Adminisztrator::keres()
 
 void Adminisztrator::manualisBevitel()
 {
-    std::cout << "Adja meg a beviteli opciot:\n 1 : uj rekord\n 2 : rekord modositasa\n>";
+    std::cout << "Adja meg a beviteli opciot:\n  1 : uj rekord\n  2 : rekord modositasa\n>";
     unsigned opcio = 0;
     std::cin >> opcio;
     Repuloter& r = Repuloter::getInstance();
@@ -117,7 +117,7 @@ void Adminisztrator::fileBevitel()
     Repuloter& r = Repuloter::getInstance();
     std::string file = "";
     std::ifstream input;
-    std::cout << "adja meg a fajl nevet: ";
+    std::cout << "Adja meg a fajl nevet: ";
     std::cin >> file;
     input.open(file,std::ios_base::in);
     if (!input.is_open())

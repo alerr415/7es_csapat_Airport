@@ -13,11 +13,11 @@ void Operator::keres()
     int param;
     std::string kulcsszo;
     std::cout << "Adja meg a keresesi parametereket" << std::endl
-              << "1 - HONNAN" << std::endl
-              << "2 - HOVA" << std::endl
-              << "3 - INDULAS (yyyy-m-d-h-m)" << std::endl
-              << "4 - ERKEZES (yyyy-m-d-h-m)" << std::endl
-              << "5 - JARAT AZONOSITO" << std::endl
+              << "  1 - HONNAN" << std::endl
+              << "  2 - HOVA" << std::endl
+              << "  3 - INDULAS (yyyy-m-d-h-m)" << std::endl
+              << "  4 - ERKEZES (yyyy-m-d-h-m)" << std::endl
+              << "  5 - JARAT AZONOSITO" << std::endl
               << ">";
     std::cin >> param;
     std::cout << "Adja meg a keresett kulcsszot:" << std::endl;
@@ -83,10 +83,10 @@ void Operator::keres()
 
 void Operator::modosit()
 {
-    std::cout << "Adja meg a jarat tipusat:\n 1 : erkezo\n 2 : indulo\n>";
+    std::cout << "Adja meg a jarat tipusat:\n  1 : erkezo\n  2 : indulo\n>";
     int opcio = 0;
     std::cin >> opcio;
-    std::cout << "Adja meg a jarat azonosítojat: ";
+    std::cout << "Adja meg a jarat azonositojat: ";
     std::string azonosito = "";
     std::cin >> azonosito;
     switch (opcio)
@@ -103,7 +103,7 @@ void Operator::modosit()
         {
             std::cout << "A jarat adatai:" << std::endl;
             std::cout << *toModify;
-            std::cout << "Adja meg a modositandó jarat uj adatait" << std::endl;
+            std::cout << "Adja meg a modositando jarat uj adatait" << std::endl;
             rekordBeolvas(*toModify);
         }
         Repuloter::getInstance().getErkezo().sort([](Jarat a, Jarat b) {
