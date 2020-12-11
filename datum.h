@@ -12,6 +12,7 @@ public:
     Datum(unsigned _ev, unsigned _honap, unsigned _nap);
     bool operator ==(const Datum& other) const;   //other Datum parameterben ?? Balint te jossz ide | megvan
     bool operator <(const Datum& other) const;
+    bool operator >(const Datum& other) const;
     friend std::ostream& operator <<(std::ostream& stream, const Datum& datum);
 
     unsigned getEv() const;

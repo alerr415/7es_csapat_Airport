@@ -41,6 +41,21 @@ bool Datum::operator <(const Datum &other) const
     else return false;
 }
 
+bool Datum::operator >(const Datum &other) const
+{
+    if (this->ev > other.ev)
+        return true;
+    else if (this->ev == other.ev && this->honap > other.honap)
+        return true;
+    else if (this->ev == other.ev && this->honap == other.honap && this->nap > other.nap)
+        return true;
+    else if (this->ev == other.ev && this->honap == other.honap && this->nap == other.nap && this->ora > other.ora)
+        return true;
+    else if (this->ev == other.ev && this->honap == other.honap && this->nap == other.nap && this->ora == other.ora && this->perc > other.perc)
+        return true;
+    else return false;
+}
+
 unsigned Datum::getEv() const
 {
     return ev;

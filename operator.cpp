@@ -12,7 +12,7 @@ void Operator::keres()
     Repuloter& instance = Repuloter::getInstance();
     int param;
     std::string kulcsszo;
-    std::cout << "Adja meg a keresesi" << std::endl
+    std::cout << "Adja meg a keresesi parametereket" << std::endl
               << "1 - HONNAN" << std::endl
               << "2 - HOVA" << std::endl
               << "3 - INDULAS (yyyy-m-d-h-m)" << std::endl
@@ -64,7 +64,7 @@ void Operator::keres()
                 std::cout << j;
             }
         }
-                break;
+        break;
     }
     case 5: {
         std::cout << "Az ezen (" << kulcsszo << ") jaratszamu jaratok adatai: " << std::endl;
