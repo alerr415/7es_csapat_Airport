@@ -17,7 +17,12 @@ void Repuloter::erkezoMegjelenit() const
 {
     std::cout << ido << std::endl;
     auto first = std::find_if(erkezo.cbegin(),erkezo.cend(),[this](Jarat j) {
-        return ido < j.getErkezes();
+        Datum d(j.getErkezes().getEv(),
+                j.getErkezes().getHonap(),
+                j.getErkezes().getNap() + (j.getErkezes().getOra()+(j.getErkezes().getPerc()+j.getKeses())/60)/30,
+                (j.getErkezes().getOra()+(j.getErkezes().getPerc()+j.getKeses())/60)%24,
+                (j.getErkezes().getPerc()+j.getKeses())%60);
+        return ido < d;
     });
     if (first == erkezo.cend())
     {
@@ -39,7 +44,12 @@ void Repuloter::induloMegjelenit() const
 {
     std::cout << ido << std::endl;
     auto first = std::find_if(indulo.cbegin(),indulo.cend(),[this](Jarat j) {
-        return ido < j.getIndulas();
+        Datum d(j.getIndulas().getEv(),
+                j.getIndulas().getHonap(),
+                j.getIndulas().getNap() + (j.getIndulas().getOra()+(j.getIndulas().getPerc()+j.getKeses())/60)/30,
+                (j.getIndulas().getOra()+(j.getIndulas().getPerc()+j.getKeses())/60)%24,
+                (j.getIndulas().getPerc()+j.getKeses())%60);
+        return ido < d;
     });
     if (first == indulo.cend())
     {
