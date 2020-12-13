@@ -93,7 +93,7 @@ int main()
                       << "2 : Kereses (bejelentkezes szukseges)" << std::endl
                       << "3 : Teljes adatbevitel (bejelentkezes szukseges)" << std::endl
                       << "4 : Modositas (bejelentkezes szukseges)" << std::endl
-                      << "5 : tabla uzemmod" << std::endl;
+                      << "5 : Tabla uzemmod" << std::endl;
             std::cout << ">" << std::flush;
             int param = 0;
             std::cin >> param;
@@ -135,7 +135,7 @@ int main()
                     Manipulator* m = bejelentkeztetoForm();
                     if (m == nullptr)
                     {
-                        std::cout << "Hibás felhasznalonev, vagy jelszo" << std::endl;
+                        std::cout << "Hibas felhasznalonev, vagy jelszo" << std::endl;
                         break;
                     }
                     m->teljesBevitel();

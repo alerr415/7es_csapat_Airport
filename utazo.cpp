@@ -15,7 +15,7 @@ void Utazo::keres()
     int opcio = 0;
     std::string idoTmp;
     std::cout << "Az aktualis helyzetet (Budapest Liszt Ferenc Repuloter)" << std::endl
-              << " 1  : INDULO\n  2 : ERKEZO" << std::endl;
+              << " 1 : INDULO \n 2 : ERKEZO" << std::endl;
     std::cin >> opcio;
     if( opcio==1) {
         std::string honnan = "BUD";

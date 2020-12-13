@@ -46,7 +46,7 @@ void Adminisztrator::modosit()
         });
         if (toModify == Repuloter::getInstance().getErkezo().end())
         {
-            std::cout << "A rendszer nem találja a megadott azonositot" << std::endl;
+            std::cout << "A rendszer nem talalja a megadott azonositot" << std::endl;
             return;
         } else
         {
@@ -154,7 +154,7 @@ Jarat Adminisztrator::rekordBeolvas()
     unsigned keses = 0;
     std::cout << "Adja meg a jarat azonositojat: " ;
     std::cin >> azonosito;
-    std::cout << "adja meg a jarat indulasi helyet: ";
+    std::cout << "Adja meg a jarat indulasi helyet: ";
     std::cin >> honnan;
     std::cout << "Adja meg a jarat erkezesi helyet: ";
     std::cin >> hova;

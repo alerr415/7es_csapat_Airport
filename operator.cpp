@@ -48,7 +48,7 @@ void Operator::keres()
         Datum idopont(String::strToNum<unsigned>(dateComponents[0]),String::strToNum<unsigned>(dateComponents[1]),String::strToNum<unsigned>(dateComponents[2]),String::strToNum<unsigned>(dateComponents[3]),String::strToNum<unsigned>(dateComponents[4]));
         dateComponents.clear();
         for(auto j: instance.getIndulo()) {
-            if(j.getIndulas()<idopont || j.getIndulas()==idopont) {
+            if(j.getIndulas()>idopont || j.getIndulas()==idopont) {
                 std::cout << j;
             }
         }
@@ -60,7 +60,7 @@ void Operator::keres()
         Datum idopont(String::strToNum<unsigned>(dateComponents[0]),String::strToNum<unsigned>(dateComponents[1]),String::strToNum<unsigned>(dateComponents[2]),String::strToNum<unsigned>(dateComponents[3]),String::strToNum<unsigned>(dateComponents[4]));
         dateComponents.clear();
         for(auto j: instance.getErkezo()) {
-            if(j.getIndulas()<idopont || j.getIndulas()==idopont) {
+            if(j.getErkezes()>idopont || j.getErkezes()==idopont) {
                 std::cout << j;
             }
         }
@@ -69,6 +69,11 @@ void Operator::keres()
     case 5: {
         std::cout << "Az ezen (" << kulcsszo << ") jaratszamu jaratok adatai: " << std::endl;
         for(auto j: instance.getIndulo()) {
+            if(j.getJaratAzonosito()==kulcsszo) {
+                std::cout << j;
+            }
+        }
+        for(auto j: instance.getErkezo()) {
             if(j.getJaratAzonosito()==kulcsszo) {
                 std::cout << j;
             }
